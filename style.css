@@ -1,0 +1,137 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+body{
+    background-color: rgb(89, 90, 105);
+    color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: rgb(43, 35, 35);
+    padding: 20px;
+    border-radius: 5px;
+    width: 50%;
+    max-width: 600px;
+}
+
+
+h1{
+    font-size: 2rem;
+}
+
+
+.user-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: start;
+}
+
+.user-input-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+#user-input{
+    width: 80%;
+    padding: 0.4rem;
+border-radius: 5px;
+}
+
+#search-btn{
+    padding: 0.4rem;
+    border-radius: 5px;
+}
+
+.circle{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #299f5d;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+    font-weight: 700;
+    background: conic-gradient(#299f5d var(--progress-degree, 0%), #283a2e 0%);
+flex-direction: column;
+}
+
+
+.circle span{
+    position: relative;
+    z-index: 2;
+}
+
+.progress{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+
+
+.stats-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 10px;
+    padding: 10px;
+    align-items: center;
+    min-width: 50%;
+    max-width: 100%;
+    min-height: 100px;
+    max-height: 100px;
+    border: 2px solid red;
+}
+
+
+.card{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+
+    border: 2px solid rgb(82, 3, 78);
+    align-items: center;
+    text-align: center;
+    /* max-width: 40%; */
+    /* max-width: 50%; */
+min-width: 100px;
+max-width: 150px;
+gap: 10px;
+margin: 10px;
+
+}
+
+
+.label{
+    font-weight: bold;
+    color: rgb(236, 11, 149);
+}
+
+.value{
+    font-weight: lighter;
+    color: #299f5d;
+}
+
+
+.stats-container{
+    display: none;
+}
