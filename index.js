@@ -27,7 +27,7 @@
 //     setTimeout(function(){
 //         console.log("I am inside set timeout block")
 //     }, 1000)
-    
+
 // }
 
 
@@ -50,7 +50,7 @@
 // getData();
 
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
 
 
     const searchButton = document.getElementById("search-btn");
@@ -65,15 +65,15 @@ document.addEventListener("DOMContentLoaded", function() {
     const cardStatsContainer = document.querySelector(".stats-card");
 
 
-    function validateUsername(username){
+    function validateUsername(username) {
 
-        if(username.trim() === ""){
+        if (username.trim() === "") {
             alert("Username should not be empty");
             return false;
         }
         const regex = /^[a-zA-Z0-9_-]{1,15}$/;
         const isMatching = regex.test(username);
-        if(!isMatching){
+        if (!isMatching) {
             alert("Invalid Username");
         }
 
@@ -82,15 +82,15 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 
-    async function fetchUserDetails(username){
+    async function fetchUserDetails(username) {
 
         const url = `https://leetcode-stats-api.herokuapp.com/${username}`
-        try{
+        try {
             searchButton.textContent = "Searching...";
             searchButton.disabled = true;
             const response = await fetch(url);
 
-            if(!response.ok){
+            if (!response.ok) {
                 throw new Error("Unable to fetch the user details");
             }
 
@@ -107,32 +107,32 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // easyLabel.textContent = data.easySolved;
         }
-        catch( err){
-// console.log("Error: " , err.message);
+        catch (err) {
+            // console.log("Error: " , err.message);
 
-statsContainer.innerHTML = `<p>${err.message}</p>`
+            statsContainer.innerHTML = `<p>${err.message}</p>`
         }
 
-        finally{
+        finally {
             searchButton.textContent = "Search";
             searchButton.disabled = false;
         }
     }
 
 
-    function updateProgerss(solved, total, label, circle){
+    function updateProgerss(solved, total, label, circle) {
 
-        const progressDegree = (solved/total)*100
+        const progressDegree = (solved / total) * 100
         circle.style.setProperty("--progress-degree", `${progressDegree}%`);
-        label.textContent =  `${solved}/${total}`;
+        label.textContent = `${solved}/${total}`;
 
 
         // cardStatsContainer.textContent = solved
     }
 
 
-    function displayUserData(data){
-        
+    function displayUserData(data) {
+
         // if(statsContainer.style.display === 'none'){
         //     statsContainer.style.display = 'block'
         // }
@@ -156,53 +156,72 @@ statsContainer.innerHTML = `<p>${err.message}</p>`
 
         statsContainer.style.display = 'block'
 
-        updateProgerss(easySolved,totalEasyQuestion, easyLabel, easyProgressCircle )
-        updateProgerss(mediumSolved,totalMediumQuestion, mediumLabel, mediumProgressCircle )
+        updateProgerss(easySolved, totalEasyQuestion, easyLabel, easyProgressCircle)
+        updateProgerss(mediumSolved, totalMediumQuestion, mediumLabel, mediumProgressCircle)
 
-        updateProgerss(hardSolved,totalHardQuestion, hardLabel, hardProgressCircle )
+        updateProgerss(hardSolved, totalHardQuestion, hardLabel, hardProgressCircle)
 
 
         const cardsData = [
-            {"label" : "Acceptance Rate" , value : data.acceptanceRate},
-            {"label" : "Total Solved" , value : data.totalSolved},
-            {"label" : "Ranking", value: data.ranking}
+            { "label": "Acceptance Rate", value: data.acceptanceRate },
+            { "label": "Total Solved", value: data.totalSolved },
+            { "label": "Ranking", value: data.ranking }
         ]
-        
 
-        console.log("cards Data: " , cardsData)
-        
+
+        console.log("cards Data: ", cardsData)
+
         cardStatsContainer.innerHTML = cardsData.map(
-            (d) =>{
+            (d) => {
 
 
                 return `<div class ="card"> 
              <h4 class ="label">${d.label} : </h4>
              <p class ="value">  ${d.value}</p>
              </div>
-             `   
+             `
             }
 
-            
-            
         ).join("")
-        
+
     }
 
-    searchButton.addEventListener("click" , function(){
+
+
+    usernameInput.addEventListener("keyup", function (e) {
+        console.log("befor keycode")
+
+
+        if (e.keyCode === 13) {
+
+            const username = usernameInput.value;
+            // console.log("loggin username" ,  username);
+
+            statsContainer.style.display = 'none'
+
+            // cardStatsContainer.textContent = "REMOVE"
+            if (validateUsername(username)) {
+                // alert("Your username is: ", username)
+                fetchUserDetails(username);
+
+            }
+        }
+    }
+    )
+
+    searchButton.addEventListener("click", function () {
         const username = usernameInput.value;
         // console.log("loggin username" ,  username);
 
         statsContainer.style.display = 'none'
 
         // cardStatsContainer.textContent = "REMOVE"
-        if(validateUsername(username)){
+        if (validateUsername(username)) {
             // alert("Your username is: ", username)
-fetchUserDetails(username);
+            fetchUserDetails(username);
 
         }
 
-        
-        
     })
 })
 
